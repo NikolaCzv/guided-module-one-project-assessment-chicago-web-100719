@@ -21,7 +21,8 @@ def start_screen
 
 
     answer = PROMPT.select("Choose your option?", [
-        "Search by song, artist or genre", 
+        "Search for song",
+        "Search for song, artist or genre", 
         "List of songs", 
         "List of artists", 
         "List of genres", 
@@ -35,8 +36,11 @@ def start_screen
 
     
 
-if answer == "Search by song, artist or genre"
+if answer == "Search for song"
     puts `clear`
+    search_by_word
+elsif answer == "Search for song, artist or genre"
+        puts `clear`
     search_by
 elsif 
     answer == "List of songs"
@@ -101,16 +105,34 @@ def titleize(string)
     phrase
 end
 
-# def search_by_word
-#     puts "Please search by song name, artist name or genre"
-#     answer = gets.chomp.downcase
+ def search_by_word
+     puts "Please enter the name of the song you would like to hear"
+     answer = gets.chomp.downcase
+
     
-#     if answer == Song.find_by name: answer || answer == Artist.find_by name: answer || answer == Genre.find_by name: answer
-#      puts "Whaaaat #{answer}"
-#     else 
-#         puts "nononono"
-#     end
-# end
+    if Song.where( "name like ?", "%#{answer}%")
+        ye = Song.where( "name like ?", "%#{answer}%")
+        newone = ye.map {|song| song.name}
+     puts "There are songs named #{newone.join(', ').titleize}"
+    else 
+        puts "There are no songs with such a word in the title."
+    end
+    start_screen
+end
+
+# def search_by_word_art
+# # puts "Please enter the name of an artist you would like to find"
+# # puts `clear`
+
+# #  if Artist.where( "name like ?", "%#{answer}%")
+# #     one = Artist.where( "name like ?", "%#{answer}%")
+# #     two = one.map {|artist| artist.name}
+# #     puts "There are artists #{two.join(', ').titleize}"
+# #  else
+# #     puts "Sorry there are no artist with such a name."
+# #  end
+# #  start_screen
+# # end
 
 def search_by
     puts "Please search by song name, artist name or genre"

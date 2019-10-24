@@ -26,6 +26,7 @@ Into the gemfile I added gem 'tty-prompt' to make it easeir for users. This will
 1. Search by song, artist or genre
 - this option is use to search for any of these above.
 
+
 2. List of songs
 - this option will provide user with the list of songs. Songs are clickable so you can see more info about the song you choose.
 
