@@ -9,12 +9,13 @@ Music app Project
 ###Running
 
 1. Don't forget 'bundle install' in your terminal
-2. To run the app you must type in "ruby bin/run.rb" in your terminal
-
+2. Run 'rake db:migrate'
+3. Run 'rake db:seed' 
+4. To run the app you must type in "ruby bin/run.rb" in your terminal
 ==========================================================
 
 
-Music app is here to store yoiur music data and information about songs, artists and genres.
+Music app is here to store your music data and information about songs, artists and genres.
 You can create, add, change or delete songs and artists. 
 
 

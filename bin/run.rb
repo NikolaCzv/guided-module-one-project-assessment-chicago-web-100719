@@ -63,7 +63,7 @@ elsif answer == "Quit"
      if question == true
         exit
       elsif question ==  false 
-           start_screen
+           main_screen
        else 
           "Wrong input. Please enter (Y/n)"
       end
@@ -123,7 +123,7 @@ one = Artist.where( "name like ?", "%#{answer}%")
 
  if one != []
     two = one.map {|artist| artist.name}
-    puts "There are artists #{two.join(', ').titleize}"
+    puts "There are artists: #{two.join(', ').titleize}"
  else
     puts "Sorry there are no artist with the word #{answer.titleize} in the name."
  end
@@ -288,7 +288,7 @@ def main_screen
         puts "                 ♫"
     end
 puts "   ♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪"
-puts "   ♪♪♪                        ♪♪♪"
+puts "   ♪♪♪           👽           ♪♪♪"
 puts "   ♪♪♪                        ♪♪♪"
 puts "   ♪♪♪    MUSIC FOR LIFE      ♪♪♪"
 puts "   ♪♪♪                        ♪♪♪"
