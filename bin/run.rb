@@ -5,24 +5,14 @@ require_relative '../lib/genre.rb'
 
 PROMPT = TTY::Prompt.new
 
+# 🎸🎺🥁🎻🎹🔊
+
 def start_screen
 
-    # puts "
-    # (s) Search by song, artist or genre
-    # (l) List of songs
-    # (a) List of artists
-    # (g) List of genres
-    # (c) Create and add song
-    # (d) Delete song
-    # (m) Main screen
-    # (mpa) Most popular artist
-    # (mpg) Most popular genre
-    # (q) Quit"
-
-
-    answer = PROMPT.select("Choose your option?", [
+    answer = PROMPT.select("Choose your option?", [ 
         "Search for song",
-        "Search for song, artist or genre", 
+        "Search for artist",
+        "Wild card search (song, artist or genre)",
         "List of songs", 
         "List of artists", 
         "List of genres", 
@@ -36,12 +26,15 @@ def start_screen
 
     
 
-if answer == "Search for song"
-    puts `clear`
-    search_by_word
-elsif answer == "Search for song, artist or genre"
+if answer == "Wild card search (song, artist or genre)"
         puts `clear`
     search_by
+elsif answer == "Search for song"
+    puts `clear`
+    search_by_word
+elsif answer == "Search for artist"
+    puts `clear`
+    search_by_word_art
 elsif 
     answer == "List of songs"
     puts `clear`
@@ -65,7 +58,7 @@ elsif answer == "Main screen"
     puts `clear`
     main_screen
 elsif answer == "Quit"
-    puts `clear`
+    puts `clear`                      
     question = PROMPT.yes?('Are you sure you want to exit? ')
      if question == true
         exit
@@ -109,30 +102,33 @@ end
      puts "Please enter the name of the song you would like to hear"
      answer = gets.chomp.downcase
 
-    
-    if Song.where( "name like ?", "%#{answer}%")
-        ye = Song.where( "name like ?", "%#{answer}%")
+     ye = Song.where( "name like ?", "%#{answer}%")
+# binding.pry
+     if ye != []
+
         newone = ye.map {|song| song.name}
-     puts "There are songs named #{newone.join(', ').titleize}"
+     puts "List of the songs with the word you are looking for: #{newone.join(', ').titleize}"
     else 
-        puts "There are no songs with such a word in the title."
+        puts "There are no songs with the word #{answer.titleize} in the title."
     end
     start_screen
 end
 
-# def search_by_word_art
-# # puts "Please enter the name of an artist you would like to find"
-# # puts `clear`
+def search_by_word_art
+puts "Please enter the name of an artist you would like to find"
+answer = gets.chomp.downcase
+puts `clear`
 
-# #  if Artist.where( "name like ?", "%#{answer}%")
-# #     one = Artist.where( "name like ?", "%#{answer}%")
-# #     two = one.map {|artist| artist.name}
-# #     puts "There are artists #{two.join(', ').titleize}"
-# #  else
-# #     puts "Sorry there are no artist with such a name."
-# #  end
-# #  start_screen
-# # end
+one = Artist.where( "name like ?", "%#{answer}%")
+
+ if one != []
+    two = one.map {|artist| artist.name}
+    puts "There are artists #{two.join(', ').titleize}"
+ else
+    puts "Sorry there are no artist with the word #{answer.titleize} in the name."
+ end
+ start_screen
+end
 
 def search_by
     puts "Please search by song name, artist name or genre"
@@ -143,6 +139,7 @@ def search_by
 
         puts " ♫♫♫ The artist who play this song is #{found_song.artist.name.titleize}. ♫♫♫"
         puts " ♫♫♫   The song is on our playlist. Enjoy your song!   ♫♫♫"
+        puts "            [music playing in the backround]                    "
     elsif 
         Artist.find_by name: answer
         found_artist = Artist.find_by name: answer
@@ -295,7 +292,7 @@ puts "   ♪♪♪                        ♪♪♪"
 puts "   ♪♪♪                        ♪♪♪"
 puts "   ♪♪♪    MUSIC FOR LIFE      ♪♪♪"
 puts "   ♪♪♪                        ♪♪♪"
-puts "   ♪♪♪                        ♪♪♪"
+puts "   ♪♪♪           🎸           ♪♪♪"
 puts "   ♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪"
 
 
@@ -303,7 +300,7 @@ puts "   ♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪♪�
     puts "                 ♫"
 end
 
-5.times do
+3.times do
     puts "\n"
 end
 
